@@ -10,6 +10,9 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonPropertyOrder({"quantity", "price", "subTotal", "product"})
 @Entity
 @Table(name = "tb_order_item")
 public class OrderItem implements Serializable {
@@ -67,6 +70,9 @@ public class OrderItem implements Serializable {
 		this.price = price;
 	}
 
+	public double getSubTotal() {
+		return price * quantity;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
